@@ -8,13 +8,13 @@ datagroup: emmanueljutst_default_datagroup {
   max_cache_age: "1 hour"
 }
 
+
 persist_with: emmanueljutst_default_datagroup
 
 
 explore: imgsrc1onerroralert2 {}
 
 explore: account {}
-explore: dimensionalized_solution {hidden:no}
 explore: billion_orders {
   join: orders {
     type: left_outer
