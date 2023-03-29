@@ -1,19 +1,22 @@
 view: dimensionalize_solution {
   derived_table: {
     sql: SELECT
-          users.city  AS `users.city`,
-          COUNT(DISTINCT orders.id ) AS `orders.count`
-      FROM demo_db.order_items  AS order_items
-      LEFT JOIN demo_db.orders  AS orders ON order_items.order_id = orders.id
-      LEFT JOIN demo_db.users  AS users ON orders.user_id = users.id
-      GROUP BY
-          1
-      ORDER BY
-          COUNT(DISTINCT orders.id ) DESC
-       ;;
+    users.city AS users_city,
+    COUNT(DISTINCT orders.id ) AS orders_count
+FROM
+    public.order_items AS order_items
+    LEFT JOIN public.orders AS orders ON order_items.order_id = orders.id
+    LEFT JOIN public.users AS users ON orders.user_id = users.id
+GROUP BY
+    users_city
+ORDER BY
+    orders_count DESC
+      ;;
+    datagroup_trigger: test_datagroup
+    distribution_style: all
   }
 
-  measure: count {
+  measure: city_count {
     type: count
     drill_fields: [detail*]
   }
@@ -21,18 +24,18 @@ view: dimensionalize_solution {
   dimension: users_city {
     type: string
     primary_key: yes
-    sql: ${TABLE}.`users.city` ;;
+    sql: ${TABLE}."users.city" ;;
   }
 
   dimension: orders_count {
     type: number
-    sql: ${TABLE}.`orders.count` ;;
+    sql: ${TABLE}."orders.count" ;;
   }
 
-measure: average_count{
-  type: number
-  sql: ${TABLE}."orders.count" ;;
-}
+  measure: average_count {
+    type: average
+    sql: ${orders_count} ;;
+  }
 
   set: detail {
     fields: [users_city, orders_count]
