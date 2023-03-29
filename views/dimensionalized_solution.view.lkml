@@ -82,8 +82,6 @@ view: dimensionalized_solution {
       ORDER BY
           orders_count DESC
             ;;
-    datagroup_trigger: test_datagroup
-    distribution_style: all
   }
 
   measure: city_count {
