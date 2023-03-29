@@ -28,6 +28,11 @@ view: dimensionalize_solution {
     sql: ${TABLE}.`orders.count` ;;
   }
 
+measure: average_count{
+  type: number
+  sql: ${TABLE}."orders.count" ;;
+}
+
   set: detail {
     fields: [users_city, orders_count]
   }
