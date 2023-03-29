@@ -56,7 +56,7 @@ explore: fakeorders {
     relationship: many_to_one
   }
 }
-
+explore: dimensionalize_ndt_solution {hidden: no}
 explore: fatal_error_user_derived_base {}
 
 explore: flights {}
