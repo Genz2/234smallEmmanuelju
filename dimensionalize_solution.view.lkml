@@ -20,6 +20,7 @@ view: dimensionalize_solution {
 
   dimension: users_city {
     type: string
+    primary_key: yes
     sql: ${TABLE}.`users.city` ;;
   }
 
