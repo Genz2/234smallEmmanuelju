@@ -47,6 +47,14 @@ view: inventory_items {
     sql: ${TABLE}.sold_at ;;
   }
 
+  dimension_group: Difference {
+    type: duration
+    intervals: [day]
+    sql_start: ${created_date} ;;
+    sql_end: ${sold_date} ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [id, products.id, products.item_name, order_items.count, order_items_vijaya.count]
