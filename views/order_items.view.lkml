@@ -50,6 +50,12 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
     value_format: "$0.00"
   }
+  dimension: sale_price_eur {
+    type: number
+    hidden: no
+    sql: ${TABLE}.sale_price ;;
+    value_format_name: eur
+  }
 
   measure: total_sale_price {
     type: sum
